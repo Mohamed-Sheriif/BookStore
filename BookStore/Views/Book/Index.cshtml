@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BookStore.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImgURL)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.FullName)
+                </td>
+                <td>
+                    @if(item.ImgURL != null)
+                    {
+                        <img src="~/uploads/@item.ImgURL" width="55px" class="img-thumbnail" />
+                    }
+                    else
+                    {
+                        <img src="~/uploads/default.jpg" width="55px" class="img-thumbnail" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BookId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BookId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
